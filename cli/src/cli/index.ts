@@ -61,12 +61,12 @@ export const runCli = async (): Promise<CliResults> => {
       "The name of the application, as well as the name of the directory to create"
     )
     .option(
-      "--noGit",
+      "--no-git",
       "Explicitly tell the CLI to not initialize a new git repo in the project",
       false
     )
     .option(
-      "--noInstall",
+      "--no-install",
       "Explicitly tell the CLI to not run the package manager's install command",
       false
     )
