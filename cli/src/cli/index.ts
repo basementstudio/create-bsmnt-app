@@ -89,7 +89,7 @@ export const runCli = async (): Promise<CliResults> => {
     )
     /** @experimental Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
     .option(
-      "--creativeStack [boolean]",
+      "--creative-stack [boolean]",
       "Experimental: Boolean value if we should install the 3D creative stack. Must be used in conjunction with `--creactiveStack`.",
       (value) => !!value && value !== "false"
     )
@@ -106,7 +106,7 @@ export const runCli = async (): Promise<CliResults> => {
       defaultOptions.flags.importAlias
     )
     .option(
-      "--appRouter [boolean]",
+      "--app-router [boolean]",
       "Explicitly tell the CLI to use the new Next.js app router",
       (value) => !!value && value !== "false"
     )
