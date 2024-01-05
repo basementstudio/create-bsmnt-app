@@ -1,20 +1,20 @@
 {
-  "name": "create-basement-app",
-  "version": "1.0.0",
+  "name": "create-bsmnt-app",
+  "version": "1.0.2",
   "description": "Create web application with the basement stack",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/basementstudio/create-basement.git",
+    "url": "https://github.com/basementstudio/create-basement-app.git",
     "directory": "cli"
   },
   "keywords": [
-    "create-basement-app",
+    "create-bsmnt-app",
     "init.tips",
     "next.js",
     "basement-stack",
     "tailwind",
-    "tRPC",
+    "basehub",
     "typescript"
   ],
   "type": "module",
