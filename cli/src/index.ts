@@ -93,8 +93,8 @@ const main = async () => {
     path.join(projectDir, ".prettierrc.cjs")
   );
   fs.renameSync(
-    path.join(projectDir, "_stylelint.cjs"),
-    path.join(projectDir, ".stylelint.cjs")
+    path.join(projectDir, "_stylelintrc.cjs"),
+    path.join(projectDir, ".stylelintrc.cjs")
   );
 
   if (!noGit) {
