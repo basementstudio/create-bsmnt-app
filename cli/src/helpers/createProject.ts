@@ -55,17 +55,39 @@ export const createProject = async ({
 
   // Select necessary _app,index / layout,page files
   if (appRouter) {
-    // Replace next.config
-    fs.copyFileSync(
-      path.join(PKG_ROOT, "template/extras/config/next-config-appdir.js"),
-      path.join(projectDir, "next.config.js")
-    );
+    if (packages.basehub.inUse) {
+      // Replace tailwind.config
+      fs.copyFileSync(
+        path.join(
+          PKG_ROOT,
+          "template/extras/config/next-config-appdir-basehub.js"
+        ),
+        path.join(projectDir, "next.config.js")
+      );
+    } else {
+      // Replace next.config
+      fs.copyFileSync(
+        path.join(PKG_ROOT, "template/extras/config/next-config-appdir.js"),
+        path.join(projectDir, "next.config.js")
+      );
+    }
 
     selectLayoutFile({ projectDir, packages });
     selectPageFile({ projectDir, packages });
   } else {
     selectAppFile({ projectDir, packages });
     selectIndexFile({ projectDir, packages });
+
+    if (packages.basehub.inUse) {
+      // Replace tailwind.config
+      fs.copyFileSync(
+        path.join(
+          PKG_ROOT,
+          "template/extras/config/next-config-pages-basehub.js"
+        ),
+        path.join(projectDir, "next.config.js")
+      );
+    }
   }
 
   // If no tailwind, select use css modules
