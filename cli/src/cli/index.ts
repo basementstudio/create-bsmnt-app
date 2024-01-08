@@ -254,7 +254,6 @@ export const runCli = async (): Promise<CliResults> => {
     if (project.basehub) packages.push("basehub");
     if (project.creativeStack) packages.push("creativeStack");
 
-    console.log(project);
     return {
       appName: project.name ?? cliResults.appName,
       packages,
