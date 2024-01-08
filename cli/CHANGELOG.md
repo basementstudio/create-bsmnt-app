@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.4
+
+### Patch Changes
+
+- [`7012beb`](https://github.com/basementstudio/create-basement-app/commit/7012beb88a00a10d0dd0d91e449782a61d81ea5d) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - fix flags
+
 ## 1.0.2
 
 ### Patch Changes
