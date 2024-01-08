@@ -17,6 +17,7 @@ const getEnvContent = () => {
   const content = `
 # When adding additional environment variables, the schema in "/src/env.js"
 # should be updated accordingly.
+BASEHUB_TOKEN="bshb_pk_56s2gv3g0azxbfj2zarn55kyxl7totvj6c9fkfg7jvrqyyu8vdnveobyvmfhr4rs"
 `
     .trim()
     .concat("\n");

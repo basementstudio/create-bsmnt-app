@@ -12,11 +12,11 @@ import { validateAppName } from "~/utils/validateAppName.js";
 import { validateImportAlias } from "~/utils/validateImportAlias.js";
 
 interface CliFlags {
-  noGit: boolean;
-  noInstall: boolean;
-  ignoreScripts: boolean;
+  "no-git": boolean;
+  "no-install": boolean;
+  "ignore-scripts": boolean;
   default: boolean;
-  importAlias: string;
+  "import-alias": string;
 
   /** @internal Used in CI. */
   CI: boolean;
@@ -25,7 +25,8 @@ interface CliFlags {
   /** @internal Used in CI. */
   basehub: boolean;
   /** @internal Used in CI. */
-  appRouter: boolean;
+  "app-router": boolean;
+  "creative-stack": boolean;
 }
 
 interface CliResults {
@@ -38,15 +39,16 @@ const defaultOptions: CliResults = {
   appName: DEFAULT_APP_NAME,
   packages: ["basehub", "tailwind"],
   flags: {
-    ignoreScripts: false,
-    noGit: false,
-    noInstall: false,
+    "ignore-scripts": false,
+    "no-git": false,
+    "no-install": false,
     default: false,
     CI: false,
     tailwind: false,
     basehub: false,
-    importAlias: "~/",
-    appRouter: false,
+    "import-alias": "~/",
+    "app-router": false,
+    "creative-stack": false,
   },
 };
 
@@ -103,7 +105,7 @@ export const runCli = async (): Promise<CliResults> => {
     .option(
       "-i, --import-alias",
       "Explicitly tell the CLI to use a custom import alias",
-      defaultOptions.flags.importAlias
+      defaultOptions.flags["import-alias"]
     )
     .option(
       "--app-router [boolean]",
@@ -135,6 +137,9 @@ export const runCli = async (): Promise<CliResults> => {
   if (cliResults.flags.CI) {
     cliResults.packages = [];
     if (cliResults.flags.tailwind) cliResults.packages.push("tailwind");
+    if (cliResults.flags.basehub) cliResults.packages.push("basehub");
+    if (cliResults.flags["creative-stack"])
+      cliResults.packages.push("creativeStack");
 
     // example how to deal with incompatible flags
     // if (cliResults.flags.prisma && cliResults.flags.drizzle) {
@@ -211,30 +216,30 @@ export const runCli = async (): Promise<CliResults> => {
             message: "Will you be using the 3D creative stack?",
           });
         },
-        ...(!cliResults.flags.noGit && {
+        ...(!cliResults.flags["no-git"] && {
           git: () => {
             return p.confirm({
               message:
                 "Should we initialize a Git repository and stage the changes?",
-              initialValue: !defaultOptions.flags.noGit,
+              initialValue: !defaultOptions.flags["no-git"],
             });
           },
         }),
-        ...(!cliResults.flags.noInstall && {
+        ...(!cliResults.flags["no-install"] && {
           install: () => {
             return p.confirm({
               message:
                 `Should we run '${pkgManager}` +
                 (pkgManager === "yarn" ? `'?` : ` install' for you?`),
-              initialValue: !defaultOptions.flags.noInstall,
+              initialValue: !defaultOptions.flags["no-install"],
             });
           },
         }),
         importAlias: () => {
           return p.text({
             message: "What import alias would you like to use?",
-            defaultValue: defaultOptions.flags.importAlias,
-            placeholder: defaultOptions.flags.importAlias,
+            defaultValue: defaultOptions.flags["import-alias"],
+            placeholder: defaultOptions.flags["import-alias"],
             validate: validateImportAlias,
           });
         },
@@ -257,11 +262,11 @@ export const runCli = async (): Promise<CliResults> => {
       packages,
       flags: {
         ...cliResults.flags,
-        appRouter: project.appRouter ?? cliResults.flags.appRouter,
-        noGit: !project.git ?? cliResults.flags.noGit,
-        noInstall: !project.install ?? cliResults.flags.noInstall,
-        ignoreScripts: project.basehub,
-        importAlias: project.importAlias ?? cliResults.flags.importAlias,
+        "app-router": project.appRouter ?? cliResults.flags["app-router"],
+        "no-git": !project.git ?? cliResults.flags["no-git"],
+        "no-install": !project.install ?? cliResults.flags["import-alias"],
+        "ignore-scripts": project.basehub,
+        "import-alias": project.importAlias ?? cliResults.flags["import-alias"],
       },
     };
   } catch (err) {
