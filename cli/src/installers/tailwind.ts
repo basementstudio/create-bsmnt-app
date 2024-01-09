@@ -26,14 +26,10 @@ export const tailwindInstaller: Installer = ({ projectDir }) => {
   const postcssCfgSrc = path.join(extrasDir, "config/postcss.config.cjs");
   const postcssCfgDest = path.join(projectDir, "postcss.config.cjs");
 
-  const prettierSrc = path.join(extrasDir, "config/_prettierrc.cjs");
-  const prettierDest = path.join(projectDir, ".prettierrc.cjs");
-
   const cssSrc = path.join(extrasDir, "src/css/global.scss");
   const cssDest = path.join(projectDir, "src/css/global.scss");
 
   fs.copySync(twCfgSrc, twCfgDest);
   fs.copySync(postcssCfgSrc, postcssCfgDest);
   fs.copySync(cssSrc, cssDest);
-  fs.copySync(prettierSrc, prettierDest);
 };

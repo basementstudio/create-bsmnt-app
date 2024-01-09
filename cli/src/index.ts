@@ -14,6 +14,7 @@ import { getUserPkgManager } from "~/utils/getUserPkgManager.js";
 import { logger } from "~/utils/logger.js";
 import { parseNameAndPath } from "~/utils/parseNameAndPath.js";
 import { renderTitle } from "~/utils/renderTitle.js";
+import { PKG_ROOT } from "./consts.js";
 import { installDependencies } from "./helpers/installDependencies.js";
 import { getVersion } from "./utils/getBsmntVersion.js";
 import {
@@ -88,10 +89,19 @@ const main = async () => {
   );
 
   // do the same for prettier and stylelint
-  fs.renameSync(
-    path.join(projectDir, "_prettierrc.cjs"),
-    path.join(projectDir, ".prettierrc.cjs")
-  );
+
+  if (packages.includes("tailwind")) {
+    const extrasDir = path.join(PKG_ROOT, "template/extras");
+    const prettierSrc = path.join(extrasDir, "config/_prettierrc.cjs");
+    const prettierDest = path.join(projectDir, ".prettierrc.cjs");
+    fs.copySync(prettierSrc, prettierDest);
+  } else {
+    fs.renameSync(
+      path.join(projectDir, "_prettierrc.cjs"),
+      path.join(projectDir, ".prettierrc.cjs")
+    );
+  }
+
   fs.renameSync(
     path.join(projectDir, "_stylelintrc.cjs"),
     path.join(projectDir, ".stylelintrc.cjs")
