@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.6
+
+### Patch Changes
+
+- [`7ea4951`](https://github.com/basementstudio/create-basement-app/commit/7ea49513fd1b8b1c0a796e3f8e2dfa1f0ace2d71) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - add basehub images domains
+
+- [`f386f7c`](https://github.com/basementstudio/create-basement-app/commit/f386f7cc58a731c7c297c295a62c58857ec2763c) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - fix css import
+
 ## 1.0.5
 
 ### Patch Changes
