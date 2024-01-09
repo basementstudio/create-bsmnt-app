@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.7
+
+### Patch Changes
+
+- [`223a16a`](https://github.com/basementstudio/create-basement-app/commit/223a16a946f2a176ac321f566ae7536bbbde241f) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - fix duplicated prettier config
+
+- [`cdd7964`](https://github.com/basementstudio/create-basement-app/commit/cdd79648185a539cd2b016def290c97d0bcf9132) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - fix tailwind prettier config override
+
 ## 1.0.6
 
 ### Patch Changes
