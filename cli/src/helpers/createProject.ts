@@ -56,7 +56,6 @@ export const createProject = async ({
   // Select necessary _app,index / layout,page files
   if (appRouter) {
     if (packages.basehub.inUse) {
-      // Replace tailwind.config
       fs.copyFileSync(
         path.join(
           PKG_ROOT,
