@@ -88,23 +88,24 @@ const main = async () => {
     path.join(projectDir, ".eslintrc.cjs")
   );
 
-  // do the same for prettier and stylelint
-
-  if (packages.includes("tailwind")) {
-    const extrasDir = path.join(PKG_ROOT, "template/extras");
-    const prettierSrc = path.join(extrasDir, "config/_prettierrc.cjs");
-    const prettierDest = path.join(projectDir, ".prettierrc.cjs");
-    fs.copySync(prettierSrc, prettierDest);
-  } else {
-    fs.renameSync(
-      path.join(projectDir, "_prettierrc.cjs"),
-      path.join(projectDir, ".prettierrc.cjs")
-    );
-  }
-
+  // do the same for stylelint
   fs.renameSync(
     path.join(projectDir, "_stylelintrc.cjs"),
     path.join(projectDir, ".stylelintrc.cjs")
+  );
+
+  // if tailwind is included, copy the prettier config from the extras folder
+  if (packages.includes("tailwind")) {
+    const extrasDir = path.join(PKG_ROOT, "template/extras");
+    const prettierSrc = path.join(extrasDir, "config/_prettierrc.cjs");
+    const prettierDest = path.join(projectDir, "_prettierrc.cjs");
+    fs.copySync(prettierSrc, prettierDest);
+  }
+
+  // rename the prettier config
+  fs.renameSync(
+    path.join(projectDir, "_prettierrc.cjs"),
+    path.join(projectDir, ".prettierrc.cjs")
   );
 
   if (!noGit) {
