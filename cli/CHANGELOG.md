@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.8
+
+### Patch Changes
+
+- [`969d6c2`](https://github.com/basementstudio/create-basement-app/commit/969d6c20558f8f76e129f59e44280271525744a4) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - fix duplicated prettier config using tailwind
+
+- [`d07e64a`](https://github.com/basementstudio/create-basement-app/commit/d07e64affe67c999840e6f54c62dc207738da710) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - fix pages css imports
+
 ## 1.0.7
 
 ### Patch Changes
