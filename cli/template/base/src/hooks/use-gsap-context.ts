@@ -1,16 +1,16 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect } from 'react'
 
-import { gsap } from "../lib/gsap";
+import { gsap } from '../lib/gsap'
 
 export const useGsapContext = (
   func: gsap.ContextFunc,
   deps: React.DependencyList = []
 ) => {
   useLayoutEffect(() => {
-    const ctx = gsap.context(func);
+    const ctx = gsap.context(func)
 
     return () => {
-      ctx?.revert();
-    };
-  }, deps);
-};
+      ctx?.revert()
+    }
+  }, deps)
+}

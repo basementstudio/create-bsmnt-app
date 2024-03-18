@@ -1,78 +1,78 @@
-import { Menu } from "@headlessui/react";
-import { type MarkdownHeading } from "astro";
-import clsx from "clsx";
-import { useEffect, useMemo, useState } from "react";
+import { Menu } from '@headlessui/react'
+import { type MarkdownHeading } from 'astro'
+import clsx from 'clsx'
+import { useEffect, useMemo, useState } from 'react'
 
 interface OnThisPageLinksProps {
-  headings: MarkdownHeading[];
-  title: string;
-  isRtl: boolean;
+  headings: MarkdownHeading[]
+  title: string
+  isRtl: boolean
 }
 
 export default function OnThisPageLinks({
   headings,
   title,
-  isRtl,
+  isRtl
 }: OnThisPageLinksProps) {
-  const isLtr = !isRtl;
+  const isLtr = !isRtl
 
   const memoedHeadings = useMemo(() => {
     // add isVisible flag in headers
     const headers = [
-      { depth: 2, slug: "overview", text: title, isVisible: true },
-      ...headings.map((h) => ({ ...h, isVisible: false })),
-    ];
+      { depth: 2, slug: 'overview', text: title, isVisible: true },
+      ...headings.map((h) => ({ ...h, isVisible: false }))
+    ]
 
-    return headers.filter(({ depth }) => depth > 1 && depth < 4);
-  }, [headings, title]);
+    return headers.filter(({ depth }) => depth > 1 && depth < 4)
+  }, [headings, title])
 
   const [headingWithIsVisible, setHeadingWithIsVisible] =
-    useState(memoedHeadings);
+    useState(memoedHeadings)
 
   useEffect(() => {
     const articleHeadings = Array.from(
-      document.querySelectorAll("article :is(h1,h2,h3)"),
-    );
+      document.querySelectorAll('article :is(h1,h2,h3)')
+    )
 
     const allObservers = articleHeadings.map((h) => {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            const id = entry.target.id;
+            const id = entry.target.id
             const tocItem = Array.from(
-              document.querySelectorAll(`a[href="#${id}"]`),
-            ).at(-1);
+              document.querySelectorAll(`a[href="#${id}"]`)
+            ).at(-1)
             // occurs when the id = "toc-heading"
-            if (!tocItem) return;
+            if (!tocItem) return
 
             if (entry.isIntersecting) {
               const headings = headingWithIsVisible.map((h) =>
                 h.slug === id
                   ? { ...h, isVisible: true }
-                  : { ...h, isVisible: false },
-              );
-              setHeadingWithIsVisible(headings);
+                  : { ...h, isVisible: false }
+              )
+              setHeadingWithIsVisible(headings)
             }
-          });
+          })
         },
         {
-          rootMargin: "-100px 0% -66%",
-          threshold: 1,
-        },
-      );
+          rootMargin: '-100px 0% -66%',
+          threshold: 1
+        }
+      )
 
-      observer.observe(h);
+      observer.observe(h)
 
-      return observer;
-    });
+      return observer
+    })
 
     return () => {
       // unobserve elements
       articleHeadings.map((h, index) => {
-        allObservers[index]?.unobserve(h);
-      });
-    };
-  }, [headings, title]);
+        allObservers[index]?.unobserve(h)
+      })
+    }
+  }, [headings, title])
 
   return (
     <div className="sticky inset-x-0 top-[72px] z-[11] block w-full bg-default px-4 pb-4 pt-2 lg:hidden">
@@ -89,8 +89,8 @@ export default function OnThisPageLinks({
                   strokeWidth={1.5}
                   stroke="currentColor"
                   className={clsx(
-                    "h-3 w-3 sm:h-4 sm:w-4",
-                    isRtl && "-scale-x-100",
+                    'h-3 w-3 sm:h-4 sm:w-4',
+                    isRtl && '-scale-x-100'
                   )}
                 >
                   <path
@@ -98,8 +98,8 @@ export default function OnThisPageLinks({
                     strokeLinejoin="round"
                     d={
                       open
-                        ? "M19.5 8.25l-7.5 7.5-7.5-7.5"
-                        : "M8.25 4.5l7.5 7.5-7.5 7.5"
+                        ? 'M19.5 8.25l-7.5 7.5-7.5-7.5'
+                        : 'M8.25 4.5l7.5 7.5-7.5 7.5'
                     }
                   />
                 </svg>
@@ -109,22 +109,22 @@ export default function OnThisPageLinks({
               dir="ltr"
               className="t3-scrollbar absolute top-full z-10 mt-3 max-h-[45vh] w-full overflow-y-auto rounded-md border-2 border-primary bg-default py-1.5 shadow-md dark:border-t3-purple-200/20 dark:bg-default"
             >
-              <ul dir={isLtr ? "ltr" : "rtl"}>
+              <ul dir={isLtr ? 'ltr' : 'rtl'}>
                 {headingWithIsVisible.map((heading) => (
                   <li key={heading.slug} className="w-full">
                     <Menu.Item>
                       {({ active }) => (
                         <a
                           className={clsx(
-                            "text-md line-clamp-1 block w-full py-2 text-t3-purple-800 transition-colors hover:bg-t3-purple-300/20 hover:text-t3-purple-400 dark:text-t3-purple-200 dark:hover:bg-t3-purple-300/10 dark:hover:text-t3-purple-50",
-                            isLtr && (heading.depth === 2 ? "pl-3" : "pl-8"),
-                            isRtl && (heading.depth === 2 ? "pr-3" : "pr-8"),
+                            'text-md line-clamp-1 block w-full py-2 text-t3-purple-800 transition-colors hover:bg-t3-purple-300/20 hover:text-t3-purple-400 dark:text-t3-purple-200 dark:hover:bg-t3-purple-300/10 dark:hover:text-t3-purple-50',
+                            isLtr && (heading.depth === 2 ? 'pl-3' : 'pl-8'),
+                            isRtl && (heading.depth === 2 ? 'pr-3' : 'pr-8'),
                             {
-                              "bg-t3-purple-300/20 text-t3-purple-400 underline dark:bg-t3-purple-300/10 dark:text-t3-purple-100":
+                              'bg-t3-purple-300/20 text-t3-purple-400 underline dark:bg-t3-purple-300/10 dark:text-t3-purple-100':
                                 active,
-                              "bg-t3-purple-300/30 font-medium text-t3-purple-700 underline dark:bg-t3-purple-300/20 dark:text-t3-purple-100":
-                                heading.isVisible,
-                            },
+                              'bg-t3-purple-300/30 font-medium text-t3-purple-700 underline dark:bg-t3-purple-300/20 dark:text-t3-purple-100':
+                                heading.isVisible
+                            }
                           )}
                           href={`#${heading.slug}`}
                         >
@@ -140,5 +140,5 @@ export default function OnThisPageLinks({
         )}
       </Menu>
     </div>
-  );
+  )
 }

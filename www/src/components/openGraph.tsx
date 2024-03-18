@@ -1,9 +1,9 @@
 interface OpenGraphProps {
-  title: string;
-  description: string;
-  imageBase: string;
-  pageUrl: string;
-  rtl: boolean;
+  title: string
+  description: string
+  imageBase: string
+  pageUrl: string
+  rtl: boolean
 }
 
 export default function OpenGraph({
@@ -11,60 +11,60 @@ export default function OpenGraph({
   description,
   imageBase,
   pageUrl,
-  rtl,
+  rtl
 }: OpenGraphProps) {
   return (
     <div
       style={{
-        display: "flex",
-        width: "1200px",
-        height: "630px",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "3rem",
-        flexDirection: rtl ? "row-reverse" : "row",
+        display: 'flex',
+        width: '1200px',
+        height: '630px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '3rem',
+        flexDirection: rtl ? 'row-reverse' : 'row',
         background:
-          "linear-gradient(180deg, rgba(48,1,113,1) 0%, rgba(17,24,39,1) 100%)",
+          'linear-gradient(180deg, rgba(48,1,113,1) 0%, rgba(17,24,39,1) 100%)'
       }}
     >
       <img
         src={`${imageBase}/images/background-pattern.svg`}
         style={{
-          position: "absolute",
-          width: "1200px",
-          height: "1200px",
-          opacity: 0.15,
+          position: 'absolute',
+          width: '1200px',
+          height: '1200px',
+          opacity: 0.15
         }}
       />
-      <Logo color={"#F5F5F5"} />
+      <Logo color={'#F5F5F5'} />
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "1.2rem",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '1.2rem'
         }}
       >
         <h1
           style={{
-            textAlign: "center",
-            fontSize: title.length > 15 ? "70px" : "90px",
-            lineHeight: "5rem",
+            textAlign: 'center',
+            fontSize: title.length > 15 ? '70px' : '90px',
+            lineHeight: '5rem',
             fontWeight: 700,
-            color: "#fff",
-            maxWidth: "700px",
+            color: '#fff',
+            maxWidth: '700px'
           }}
         >
           {title}
         </h1>
         <h2
           style={{
-            color: "#F5F5F5",
-            fontSize: "40px",
+            color: '#F5F5F5',
+            fontSize: '40px',
             fontWeight: 400,
-            maxWidth: "700px",
-            textAlign: "center",
-            wordBreak: "break-word",
+            maxWidth: '700px',
+            textAlign: 'center',
+            wordBreak: 'break-word'
           }}
         >
           {description}
@@ -72,17 +72,17 @@ export default function OpenGraph({
       </div>
       <h3
         style={{
-          fontSize: "40px",
-          color: "#c3b4fc",
+          fontSize: '40px',
+          color: '#c3b4fc',
           fontWeight: 400,
-          position: "absolute",
-          bottom: "20px",
+          position: 'absolute',
+          bottom: '20px'
         }}
       >
         {pageUrl}
       </h3>
     </div>
-  );
+  )
 }
 
 const Logo = ({ color }: { color: string }) => (
@@ -110,4 +110,4 @@ const Logo = ({ color }: { color: string }) => (
       fill={color}
     />
   </svg>
-);
+)

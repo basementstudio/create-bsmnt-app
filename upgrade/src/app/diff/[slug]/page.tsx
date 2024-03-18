@@ -1,79 +1,79 @@
-import gitdiffParser from "gitdiff-parser";
-import { CheckIcon, ChevronRight, XIcon } from "lucide-react";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import gitdiffParser from 'gitdiff-parser'
+import { CheckIcon, ChevronRight, XIcon } from 'lucide-react'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
-import { Button } from "~/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "~/components/ui/dialog";
+import { Button } from '~/components/ui/button'
+import { Dialog, DialogContent, DialogTrigger } from '~/components/ui/dialog'
 import {
   cn,
   extractVersionsAndFeatures,
   getDiffFromGithub,
   getFeatureUrl,
   prettyFeatureNameMap,
-  type Features,
-} from "~/lib/utils";
-import DownloadButton from "./download-button";
-import { Files } from "./files";
-import HowToApplyDiff from "./how-to-apply-diff.mdx";
+  type Features
+} from '~/lib/utils'
+import DownloadButton from './download-button'
+import { Files } from './files'
+import HowToApplyDiff from './how-to-apply-diff.mdx'
 
 export async function generateMetadata({
-  params,
+  params
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }) {
-  const versionsAndFeatures = extractVersionsAndFeatures(params.slug);
-  if (!versionsAndFeatures) notFound();
-  const diff = await getDiffFromGithub(versionsAndFeatures).catch(notFound);
-  const files = gitdiffParser.parse(diff ?? "");
-  let totalAdditions = 0;
-  let totalRemovals = 0;
+  const versionsAndFeatures = extractVersionsAndFeatures(params.slug)
+  if (!versionsAndFeatures) notFound()
+  const diff = await getDiffFromGithub(versionsAndFeatures).catch(notFound)
+  const files = gitdiffParser.parse(diff ?? '')
+  let totalAdditions = 0
+  let totalRemovals = 0
   files.forEach((file) => {
     file.hunks?.forEach((hunk) => {
       hunk.changes.forEach((change) => {
-        if (change.type === "insert") totalAdditions++;
-        if (change.type === "delete") totalRemovals++;
-      });
-    });
-  });
+        if (change.type === 'insert') totalAdditions++
+        if (change.type === 'delete') totalRemovals++
+      })
+    })
+  })
 
   const queryParams = new URLSearchParams({
     currentVersion: versionsAndFeatures.currentVersion,
     upgradeVersion: versionsAndFeatures.upgradeVersion,
     additions: String(totalAdditions),
-    removals: String(totalRemovals),
-  });
+    removals: String(totalRemovals)
+  })
 
   return {
     openGraph: {
-      images: [{ url: `/api/og?${queryParams}` }],
+      images: [{ url: `/api/og?${queryParams}` }]
     },
     twitter: {
-      card: "summary_large_image",
-      images: [{ url: `/api/og?${queryParams}` }],
-    },
-  };
+      card: 'summary_large_image',
+      images: [{ url: `/api/og?${queryParams}` }]
+    }
+  }
 }
 
 export default async function Page({
   params,
-  searchParams,
+  searchParams
 }: {
-  params: { slug: string };
-  searchParams: Record<string, string>;
+  params: { slug: string }
+  searchParams: Record<string, string>
 }) {
-  if (!params?.slug) notFound();
-  const versionsAndFeatures = extractVersionsAndFeatures(params.slug);
-  const viewType = searchParams.viewType === "unified" ? "unified" : "split";
+  if (!params?.slug) notFound()
+  const versionsAndFeatures = extractVersionsAndFeatures(params.slug)
+  const viewType = searchParams.viewType === 'unified' ? 'unified' : 'split'
 
-  if (!versionsAndFeatures) notFound();
-  const diff = await getDiffFromGithub(versionsAndFeatures).catch(notFound);
+  if (!versionsAndFeatures) notFound()
+  const diff = await getDiffFromGithub(versionsAndFeatures).catch(notFound)
 
   return (
     <main className="container flex min-h-[calc(100vh-4rem)] min-w-[900px] flex-col py-8">
       <div className="mx-auto w-full max-w-4xl">
         <h1 className="mb-4 text-center text-4xl font-extrabold tracking-tight sm:text-5xl">
-          Changes from {versionsAndFeatures?.currentVersion} to{" "}
+          Changes from {versionsAndFeatures?.currentVersion} to{' '}
           {versionsAndFeatures?.upgradeVersion}
         </h1>
         <div className="my-4 flex w-full items-center justify-center gap-4">
@@ -81,7 +81,7 @@ export default async function Page({
 
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant={"ghost"}>How to apply the patch?</Button>
+              <Button variant={'ghost'}>How to apply the patch?</Button>
             </DialogTrigger>
             <DialogContent className="w-max">
               <HowToApplyDiff />
@@ -97,8 +97,8 @@ export default async function Page({
               >
                 <div
                   className={cn(
-                    "flex w-16 shrink-0 items-center justify-center rounded-l text-sm font-medium",
-                    enabled ? "bg-success" : "bg-destructive",
+                    'flex w-16 shrink-0 items-center justify-center rounded-l text-sm font-medium',
+                    enabled ? 'bg-success' : 'bg-destructive'
                   )}
                 >
                   {enabled ? <CheckIcon /> : <XIcon />}
@@ -120,7 +120,7 @@ export default async function Page({
                   </Button>
                 </a>
               </li>
-            ),
+            )
           )}
         </ul>
       </div>
@@ -130,8 +130,8 @@ export default async function Page({
           <Link
             href={`/diff/${params.slug}?viewType=split`}
             className={cn(
-              "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-10 py-2 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-              viewType === "split" && "bg-background text-foreground shadow-sm",
+              'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-10 py-2 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+              viewType === 'split' && 'bg-background text-foreground shadow-sm'
             )}
           >
             Split
@@ -139,9 +139,9 @@ export default async function Page({
           <Link
             href={`/diff/${params.slug}?viewType=unified`}
             className={cn(
-              "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-10 py-2 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background",
-              viewType === "unified" &&
-                "bg-background text-foreground shadow-sm",
+              'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-10 py-2 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background',
+              viewType === 'unified' &&
+                'bg-background text-foreground shadow-sm'
             )}
           >
             Unified
@@ -149,13 +149,13 @@ export default async function Page({
           <span className="ml-4">or</span>
           <Link
             href={
-              "https://github.com/t3-oss/create-t3-app/compare/" +
+              'https://github.com/t3-oss/create-t3-app/compare/' +
               encodeURIComponent(
-                `create-t3-app@${versionsAndFeatures.currentVersion}...create-t3-app@${versionsAndFeatures.upgradeVersion}`,
+                `create-t3-app@${versionsAndFeatures.currentVersion}...create-t3-app@${versionsAndFeatures.upgradeVersion}`
               )
             }
             className={cn(
-              "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-4 py-2 text-sm font-medium ring-offset-background transition-all hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background",
+              'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-4 py-2 text-sm font-medium ring-offset-background transition-all hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background'
             )}
           >
             View on Github
@@ -164,5 +164,5 @@ export default async function Page({
         <Files diffText={diff} viewType={viewType} />
       </div>
     </main>
-  );
+  )
 }

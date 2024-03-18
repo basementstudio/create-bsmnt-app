@@ -1,5 +1,5 @@
 /** @jsxImportSource react */
-import Typist from "react-typist";
+import Typist from 'react-typist'
 
 export default function CodeCard() {
   return (
@@ -191,5 +191,5 @@ export default function CodeCard() {
         </Typist>
       </div>
     </div>
-  );
+  )
 }

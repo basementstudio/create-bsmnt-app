@@ -1,8 +1,8 @@
-import { type MDXComponents } from "mdx/types";
-import Link from "next/link";
-import * as React from "react";
+import { type MDXComponents } from 'mdx/types'
+import Link from 'next/link'
+import * as React from 'react'
 
-import { Steps } from "./components/mdx";
+import { Steps } from './components/mdx'
 
 // This file is required to use MDX in `app` directory.
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -24,8 +24,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <p className="leading-7 [&:not(:first-child)]:mt-6" {...props} />
     ),
     a: ({ children, href }) => {
-      const isExternal = href?.startsWith("http");
-      const Component = isExternal ? "a" : Link;
+      const isExternal = href?.startsWith('http')
+      const Component = isExternal ? 'a' : Link
       return (
         <Component
           href={href!}
@@ -33,7 +33,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         >
           {children}
         </Component>
-      );
+      )
     },
     code: (props) => (
       <code
@@ -53,6 +53,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Steps: Steps,
 
     // Pass through all other components.
-    ...components,
-  };
+    ...components
+  }
 }

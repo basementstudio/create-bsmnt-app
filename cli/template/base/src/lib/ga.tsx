@@ -1,25 +1,25 @@
-import { useRouter } from "next/router";
-import Script from "next/script";
-import * as React from "react";
+import { useRouter } from 'next/router'
+import Script from 'next/script'
+import * as React from 'react'
 
-import { gaTrackingId } from "./constants";
+import { gaTrackingId } from './constants'
 
 declare global {
   interface Window {
-    gtag: undefined | ((...args: unknown[]) => void);
+    gtag: undefined | ((...args: unknown[]) => void)
   }
 }
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url: string) => {
   if (!window.gtag) {
-    console.warn("window.gtag is not defined");
-    return;
+    console.warn('window.gtag is not defined')
+    return
   }
-  window.gtag("config", gaTrackingId, {
+  window.gtag('config', gaTrackingId, {
     page_path: url,
-  });
-};
+  })
+}
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
 export const event = ({
@@ -28,21 +28,21 @@ export const event = ({
   label,
   value,
 }: {
-  action: string;
-  category: string;
-  label: string;
-  value: string;
+  action: string
+  category: string
+  label: string
+  value: string
 }) => {
   if (!window.gtag) {
-    console.warn("window.gtag is not defined");
-    return;
+    console.warn('window.gtag is not defined')
+    return
   }
-  window.gtag("event", action, {
+  window.gtag('event', action, {
     event_category: category,
     event_label: label,
     value: value,
-  });
-};
+  })
+}
 
 // Put this in _document.tsx
 export const GAScripts = () => {
@@ -72,20 +72,20 @@ export const GAScripts = () => {
         }}
       />
     </>
-  );
-};
+  )
+}
 
 // Use this hook in _app.tsx
 export const useAppGA = () => {
-  const router = useRouter();
+  const router = useRouter()
 
   React.useEffect(() => {
     const handleRouteChange = (url: string) => {
-      pageview(url);
-    };
-    router.events.on("routeChangeComplete", handleRouteChange);
+      pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
     return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
-};
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
+}

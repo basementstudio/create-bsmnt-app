@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import { Info } from "lucide-react";
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { Info } from 'lucide-react'
+import Link from 'next/link'
+import { useEffect, useMemo, useState } from 'react'
 
-import { buttonVariants } from "~/components/ui/button";
-import { Checkbox } from "~/components/ui/checkbox";
-import { Dialog, DialogContent, DialogTrigger } from "~/components/ui/dialog";
-import { Label } from "~/components/ui/label";
+import { buttonVariants } from '~/components/ui/button'
+import { Checkbox } from '~/components/ui/checkbox'
+import { Dialog, DialogContent, DialogTrigger } from '~/components/ui/dialog'
+import { Label } from '~/components/ui/label'
 import {
   Select,
   SelectContent,
@@ -15,33 +15,33 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
+  SelectValue
+} from '~/components/ui/select'
 import {
   cn,
   prettyFeatureNameMap,
   type Features,
-  type VersionsGroupedByMajor,
-} from "~/lib/utils";
-import WheresMyVersion from "./wheres-my-version.mdx";
+  type VersionsGroupedByMajor
+} from '~/lib/utils'
+import WheresMyVersion from './wheres-my-version.mdx'
 
 export function UpgradePanel({
-  versionOptions,
+  versionOptions
 }: {
-  versionOptions: VersionsGroupedByMajor;
+  versionOptions: VersionsGroupedByMajor
 }) {
-  const [currentVersion, setCurrentVersion] = useState<string>();
-  const [upgradeVersion, setUpgradeVersion] = useState<string>();
+  const [currentVersion, setCurrentVersion] = useState<string>()
+  const [upgradeVersion, setUpgradeVersion] = useState<string>()
   const [features, setFeatures] = useState<Features>({
     nextAuth: false,
     prisma: false,
     trpc: false,
-    tailwind: false,
-  });
+    tailwind: false
+  })
 
   const upgradeVersionOptions = useMemo(() => {
-    if (!currentVersion) return versionOptions;
-    const [major, minor, patch] = currentVersion.split(".");
+    if (!currentVersion) return versionOptions
+    const [major, minor, patch] = currentVersion.split('.')
 
     // filter out versions that are older than the current version
     const filteredVersions = versionOptions
@@ -54,58 +54,58 @@ export function UpgradePanel({
               versionOptions.find((v) => v.major === option.major)?.versions ??
               []
             ).filter((version) => {
-              const [, versionMinor, versionPatch] = version.split(".");
-              if (Number(versionMinor) > Number(minor)) return true;
+              const [, versionMinor, versionPatch] = version.split('.')
+              if (Number(versionMinor) > Number(minor)) return true
               if (
                 Number(versionMinor) === Number(minor) &&
                 Number(versionPatch) > Number(patch)
               )
-                return true;
-              return false;
-            }),
-          });
+                return true
+              return false
+            })
+          })
         } else {
           acc.push({
             major: option.major,
             versions:
               versionOptions.find((v) => v.major === option.major)?.versions ??
-              [],
-          });
+              []
+          })
         }
 
-        return acc;
-      }, []);
+        return acc
+      }, [])
 
     // if only one major version is available and it has no versions, return empty object
     if (
       filteredVersions.length === 1 &&
       (filteredVersions[0]?.versions.length ?? []) === 0
     )
-      return [];
+      return []
 
-    return filteredVersions;
-  }, [currentVersion, versionOptions]);
+    return filteredVersions
+  }, [currentVersion, versionOptions])
 
-  const noUpgradeAvailable = upgradeVersionOptions.length === 0;
+  const noUpgradeAvailable = upgradeVersionOptions.length === 0
 
   useEffect(() => {
     if (noUpgradeAvailable) {
-      setUpgradeVersion(undefined);
+      setUpgradeVersion(undefined)
     } else {
-      setUpgradeVersion(upgradeVersionOptions[0]?.versions[0] ?? undefined);
+      setUpgradeVersion(upgradeVersionOptions[0]?.versions[0] ?? undefined)
     }
-  }, [noUpgradeAvailable, upgradeVersionOptions]);
+  }, [noUpgradeAvailable, upgradeVersionOptions])
 
   const diffLink = useMemo(() => {
-    if (!currentVersion || !upgradeVersion) return undefined;
+    if (!currentVersion || !upgradeVersion) return undefined
 
-    const baseDiff = `/diff/${currentVersion}...${upgradeVersion}`;
+    const baseDiff = `/diff/${currentVersion}...${upgradeVersion}`
     const featuresString = Object.keys(features)
       .filter((feature) => features[feature as keyof typeof features])
-      .join("-");
+      .join('-')
 
-    return featuresString ? `${baseDiff}-${featuresString}` : baseDiff;
-  }, [currentVersion, features, upgradeVersion]);
+    return featuresString ? `${baseDiff}-${featuresString}` : baseDiff
+  }, [currentVersion, features, upgradeVersion])
 
   return (
     <div className="w-full max-w-lg space-y-8">
@@ -118,10 +118,10 @@ export function UpgradePanel({
                 id={feature}
                 checked={features[feature as keyof typeof features]}
                 onCheckedChange={(value) =>
-                  value !== "indeterminate"
+                  value !== 'indeterminate'
                     ? setFeatures((prev) => ({
                         ...prev,
-                        [feature]: value,
+                        [feature]: value
                       }))
                     : null
                 }
@@ -184,8 +184,8 @@ export function UpgradePanel({
                 <SelectValue
                   placeholder={
                     noUpgradeAvailable
-                      ? "No upgrade available"
-                      : "Select version"
+                      ? 'No upgrade available'
+                      : 'Select version'
                   }
                 />
               </SelectTrigger>
@@ -207,16 +207,16 @@ export function UpgradePanel({
           </div>
         </div>
         <Link
-          href={diffLink ?? "#"}
+          href={diffLink ?? '#'}
           className={cn(
             buttonVariants(),
             (!currentVersion || !upgradeVersion) &&
-              "pointer-events-none opacity-50",
+              'pointer-events-none opacity-50'
           )}
         >
           Upgrade
         </Link>
       </div>
     </div>
-  );
+  )
 }

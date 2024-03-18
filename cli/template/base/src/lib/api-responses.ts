@@ -1,6 +1,6 @@
-import { type NextApiResponse } from "next";
+import { type NextApiResponse } from 'next'
 
-import { formatError } from "./utils";
+import { formatError } from './utils'
 
 // Some helpers for usual http responses
 
@@ -8,28 +8,28 @@ export function success(
   res: NextApiResponse,
   json: Record<string, unknown> = {}
 ) {
-  return res.status(200).json(json);
+  return res.status(200).json(json)
 }
 
 export function badRequest(
   res: NextApiResponse,
-  error: unknown = "Bad Request"
+  error: unknown = 'Bad Request'
 ) {
-  console.error(error);
-  return res.status(400).json({ error: formatError(error) });
+  console.error(error)
+  return res.status(400).json({ error: formatError(error) })
 }
 
 export function notAuthorized(
   res: NextApiResponse,
-  error: unknown = "Not Authorized"
+  error: unknown = 'Not Authorized'
 ) {
-  console.error(error);
-  return res.status(401).json({ error: formatError(error) });
+  console.error(error)
+  return res.status(401).json({ error: formatError(error) })
 }
 
-export function notFound(res: NextApiResponse, error: unknown = "Not Found") {
-  console.error(error);
-  return res.status(404).json({ error: formatError(error) });
+export function notFound(res: NextApiResponse, error: unknown = 'Not Found') {
+  console.error(error)
+  return res.status(404).json({ error: formatError(error) })
 }
 
 export function internalServerError(
@@ -37,6 +37,6 @@ export function internalServerError(
   error: unknown,
   code = 500
 ) {
-  console.error(error);
-  return res.status(code).json({ error: formatError(error) });
+  console.error(error)
+  return res.status(code).json({ error: formatError(error) })
 }

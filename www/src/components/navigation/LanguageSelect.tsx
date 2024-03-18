@@ -1,21 +1,21 @@
-import { Listbox, Transition } from "@headlessui/react";
-import clsx from "clsx";
-import { Fragment } from "react";
+import { Listbox, Transition } from '@headlessui/react'
+import clsx from 'clsx'
+import { Fragment } from 'react'
 
-import { KNOWN_LANGUAGES, type KnownLanguageCode } from "../../config";
-import { getIsRtlFromLangCode } from "../../languages";
+import { KNOWN_LANGUAGES, type KnownLanguageCode } from '../../config'
+import { getIsRtlFromLangCode } from '../../languages'
 
 interface LanguageSelectProps {
-  language: KnownLanguageCode;
+  language: KnownLanguageCode
 }
 
 export default function LanguageSelect({ language }: LanguageSelectProps) {
   const handleSelect = (code: string) => {
-    const [_1, _2, ...slug] = window.location.pathname.split("/");
-    window.location.pathname = `/${code}/${slug.join("/")}`;
-  };
+    const [_1, _2, ...slug] = window.location.pathname.split('/')
+    window.location.pathname = `/${code}/${slug.join('/')}`
+  }
 
-  const isRTL = getIsRtlFromLangCode(language);
+  const isRTL = getIsRtlFromLangCode(language)
 
   return (
     <div className="flex items-center gap-2">
@@ -39,15 +39,15 @@ export default function LanguageSelect({ language }: LanguageSelectProps) {
           </Listbox.Button>
           <Transition
             as={Fragment}
-            enter={"transition ease-out duration-100"}
-            enterFrom={"transform opacity-0 -translate-y-1"}
-            enterTo={"transform opacity-100 -translate-y-0"}
+            enter={'transition ease-out duration-100'}
+            enterFrom={'transform opacity-0 -translate-y-1'}
+            enterTo={'transform opacity-100 -translate-y-0'}
           >
             <Listbox.Options
               dir="ltr"
               className={clsx(
-                "focus-none shadow-l t3-scrollbar absolute right-0 mt-1 max-h-60 w-fit overflow-auto rounded-lg border bg-default text-base focus:outline-none focus-visible:outline-none dark:border-t3-purple-200/20 sm:text-sm",
-                isRTL && "text-right",
+                'focus-none shadow-l t3-scrollbar absolute right-0 mt-1 max-h-60 w-fit overflow-auto rounded-lg border bg-default text-base focus:outline-none focus-visible:outline-none dark:border-t3-purple-200/20 sm:text-sm',
+                isRTL && 'text-right'
               )}
             >
               {Object.entries(KNOWN_LANGUAGES).map(([code, name]) => (
@@ -55,18 +55,18 @@ export default function LanguageSelect({ language }: LanguageSelectProps) {
                   key={code}
                   className={({ selected, active }) =>
                     `focus-none relative cursor-pointer bg-t3-purple-200/50 px-4 py-2 text-slate-900 outline-none hover:bg-t3-purple-300/75 dark:bg-t3-purple-200/10 dark:text-t3-purple-100 dark:hover:bg-t3-purple-200/20 ${
-                      selected && "bg-t3-purple-400/75 dark:bg-t3-purple-400/20"
+                      selected && 'bg-t3-purple-400/75 dark:bg-t3-purple-400/20'
                     }
-                    ${active && "bg-t3-purple-300/75 dark:bg-t3-purple-200/20"}`
+                    ${active && 'bg-t3-purple-300/75 dark:bg-t3-purple-200/20'}`
                   }
                   value={code}
                 >
                   {({ selected }) => (
                     <span
                       className={clsx(
-                        "truncate",
-                        selected && "font-medium",
-                        !selected && "font-normal",
+                        'truncate',
+                        selected && 'font-medium',
+                        !selected && 'font-normal'
                       )}
                     >
                       {name}
@@ -79,5 +79,5 @@ export default function LanguageSelect({ language }: LanguageSelectProps) {
         </div>
       </Listbox>
     </div>
-  );
+  )
 }

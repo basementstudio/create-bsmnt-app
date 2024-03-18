@@ -1,8 +1,8 @@
-import { UpgradePanel } from "~/app/upgrade-panel";
-import { getT3VersionsGroupedByMajor } from "~/lib/utils";
+import { UpgradePanel } from '~/app/upgrade-panel'
+import { getT3VersionsGroupedByMajor } from '~/lib/utils'
 
 export default async function Page() {
-  const t3Versions = await getT3VersionsGroupedByMajor();
+  const t3Versions = await getT3VersionsGroupedByMajor()
 
   return (
     <main className="flex h-[calc(100vh-4rem)] flex-col items-center justify-center bg-gradient-to-b from-background to-muted">
@@ -13,5 +13,5 @@ export default async function Page() {
         <UpgradePanel versionOptions={t3Versions} />
       </div>
     </main>
-  );
+  )
 }

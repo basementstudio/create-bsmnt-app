@@ -1,17 +1,17 @@
-import path from "path";
-import fs from "fs-extra";
+import path from 'path'
+import fs from 'fs-extra'
 
-import { type Installer } from "~/installers/index.js";
+import { type Installer } from '~/installers/index.js'
 
 export const envVariablesInstaller: Installer = ({ projectDir }) => {
-  const envContent = getEnvContent();
+  const envContent = getEnvContent()
 
-  const envDest = path.join(projectDir, ".env");
-  const envExampleDest = path.join(projectDir, ".env.example");
+  const envDest = path.join(projectDir, '.env')
+  const envExampleDest = path.join(projectDir, '.env.example')
 
-  fs.writeFileSync(envDest, envContent, "utf-8");
-  fs.writeFileSync(envExampleDest, exampleEnvContent + envContent, "utf-8");
-};
+  fs.writeFileSync(envDest, envContent, 'utf-8')
+  fs.writeFileSync(envExampleDest, exampleEnvContent + envContent, 'utf-8')
+}
 
 const getEnvContent = () => {
   const content = `
@@ -20,10 +20,10 @@ const getEnvContent = () => {
 BASEHUB_TOKEN="bshb_pk_56s2gv3g0azxbfj2zarn55kyxl7totvj6c9fkfg7jvrqyyu8vdnveobyvmfhr4rs"
 `
     .trim()
-    .concat("\n");
+    .concat('\n')
 
-  return content;
-};
+  return content
+}
 
 const exampleEnvContent = `
 # Since the ".env" file is gitignored, you can use the ".env.example" file to
@@ -35,4 +35,4 @@ const exampleEnvContent = `
 # ".env" and populate it with your secrets.
 `
   .trim()
-  .concat("\n\n");
+  .concat('\n\n')

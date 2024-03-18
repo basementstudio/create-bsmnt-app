@@ -1,5 +1,5 @@
-import { createEnv } from "@t3-oss/env-nextjs";
-import { z } from "zod";
+import { createEnv } from '@t3-oss/env-nextjs'
+import { z } from 'zod'
 
 export const env = createEnv({
   /**
@@ -7,10 +7,10 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    NODE_ENV: z.enum(["development", "test", "production"]),
+    NODE_ENV: z.enum(['development', 'test', 'production']),
     GITHUB_PERSONAL_ACCESS_TOKEN: z.string(),
     GITHUB_DIFFS_OWNER: z.string(),
-    GITHUB_DIFFS_REPO: z.string(),
+    GITHUB_DIFFS_REPO: z.string()
   },
 
   /**
@@ -30,7 +30,7 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     GITHUB_PERSONAL_ACCESS_TOKEN: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
     GITHUB_DIFFS_OWNER: process.env.GITHUB_DIFFS_OWNER,
-    GITHUB_DIFFS_REPO: process.env.GITHUB_DIFFS_REPO,
+    GITHUB_DIFFS_REPO: process.env.GITHUB_DIFFS_REPO
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
@@ -38,5 +38,5 @@ export const env = createEnv({
    * Makes it so that empty strings are treated as undefined. `SOME_VAR: z.string()` and
    * `SOME_VAR=''` will throw an error.
    */
-  emptyStringAsUndefined: true,
-});
+  emptyStringAsUndefined: true
+})

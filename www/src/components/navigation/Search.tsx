@@ -1,53 +1,53 @@
 /** @jsxImportSource react */
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState } from 'react'
 
-import { ALGOLIA } from "../../config";
+import { ALGOLIA } from '../../config'
 
-import "../../styles/algolia/style.css";
+import '../../styles/algolia/style.css'
 
-import * as docSearchReact from "@docsearch/react";
-import clsx from "clsx";
-import { createPortal } from "react-dom";
+import * as docSearchReact from '@docsearch/react'
+import clsx from 'clsx'
+import { createPortal } from 'react-dom'
 
 /** FIXME: This is still kinda nasty, but DocSearch is not ESM ready. */
 const DocSearchModal =
   docSearchReact.DocSearchModal ||
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
-  (docSearchReact as any).default.DocSearchModal;
+  (docSearchReact as any).default.DocSearchModal
 const useDocSearchKeyboardEvents =
   docSearchReact.useDocSearchKeyboardEvents ||
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
-  (docSearchReact as any).default.useDocSearchKeyboardEvents;
+  (docSearchReact as any).default.useDocSearchKeyboardEvents
 
 export default function Search({ isLanding }: { isLanding: boolean }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const searchButtonRef = useRef<HTMLButtonElement>(null);
-  const [initialQuery, setInitialQuery] = useState("");
+  const [isOpen, setIsOpen] = useState(false)
+  const searchButtonRef = useRef<HTMLButtonElement>(null)
+  const [initialQuery, setInitialQuery] = useState('')
 
   const onOpen = useCallback(() => {
-    setIsOpen(true);
-  }, [setIsOpen]);
+    setIsOpen(true)
+  }, [setIsOpen])
 
   const onClose = useCallback(() => {
-    setIsOpen(false);
-  }, [setIsOpen]);
+    setIsOpen(false)
+  }, [setIsOpen])
 
   const onInput = useCallback(
     (e: KeyboardEvent) => {
-      setIsOpen(true);
-      setInitialQuery(e.key);
+      setIsOpen(true)
+      setInitialQuery(e.key)
     },
-    [setIsOpen, setInitialQuery],
-  );
+    [setIsOpen, setInitialQuery]
+  )
 
   useDocSearchKeyboardEvents({
     isOpen,
     onOpen,
     onClose,
     onInput,
-    searchButtonRef,
-  });
+    searchButtonRef
+  })
 
   return (
     <>
@@ -57,13 +57,13 @@ export default function Search({ isLanding }: { isLanding: boolean }) {
         ref={searchButtonRef}
         onClick={onOpen}
         className={clsx(
-          "flex w-full cursor-text items-center justify-between rounded-lg px-4 py-2 text-sm font-medium text-slate-800 !transition-colors !duration-300 dark:text-slate-100",
+          'flex w-full cursor-text items-center justify-between rounded-lg px-4 py-2 text-sm font-medium text-slate-800 !transition-colors !duration-300 dark:text-slate-100',
           {
-            "hover:bg-t3-purple/20 border border-t3-purple-200/20 bg-t3-purple-200/10 duration-300 hover:border-t3-purple-200/50":
+            'hover:bg-t3-purple/20 border border-t3-purple-200/20 bg-t3-purple-200/10 duration-300 hover:border-t3-purple-200/50':
               isLanding,
-            "dark:hover:bg-t3-purple/20 border bg-t3-purple-200/50 duration-300 hover:bg-t3-purple-200/75 dark:border-t3-purple-200/20 dark:bg-t3-purple-200/10 dark:text-slate-100 dark:hover:border-t3-purple-200/50":
-              !isLanding,
-          },
+            'dark:hover:bg-t3-purple/20 border bg-t3-purple-200/50 duration-300 hover:bg-t3-purple-200/75 dark:border-t3-purple-200/20 dark:bg-t3-purple-200/10 dark:text-slate-100 dark:hover:border-t3-purple-200/50':
+              !isLanding
+          }
         )}
       >
         <div className="flex items-center justify-center gap-1 lg:gap-3">
@@ -101,19 +101,19 @@ export default function Search({ isLanding }: { isLanding: boolean }) {
                 return items.map((item) => {
                   // We transform the absolute URL into a relative URL to
                   // work better on localhost, preview URLS.
-                  const a = document.createElement("a");
-                  a.href = item.url;
-                  const hash = a.hash === "#overview" ? "" : a.hash;
+                  const a = document.createElement('a')
+                  a.href = item.url
+                  const hash = a.hash === '#overview' ? '' : a.hash
                   return {
                     ...item,
-                    url: `${a.pathname}${hash}`,
-                  };
-                });
+                    url: `${a.pathname}${hash}`
+                  }
+                })
               }}
             />
           </div>,
-          document.body,
+          document.body
         )}
     </>
-  );
+  )
 }

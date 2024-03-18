@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { type File as FileData } from "gitdiff-parser";
-import { Fragment, useMemo, useState } from "react";
+import { type File as FileData } from 'gitdiff-parser'
+import { Fragment, useMemo, useState } from 'react'
 import {
   Decoration,
   Diff,
@@ -9,18 +9,18 @@ import {
   markEdits,
   parseDiff,
   tokenize,
-  type ViewType,
-} from "react-diff-view";
-import { refractor } from "refractor";
-import ts from "refractor/lang/typescript";
+  type ViewType
+} from 'react-diff-view'
+import { refractor } from 'refractor'
+import ts from 'refractor/lang/typescript'
 
-import { cn } from "~/lib/utils";
+import { cn } from '~/lib/utils'
 
 export function Files(props: { diffText: string; viewType: ViewType }) {
-  const files = parseDiff(props.diffText ?? "");
+  const files = parseDiff(props.diffText ?? '')
   const [expandedDiffs, setExpandedDiffs] = useState<boolean[]>(
-    Array.from({ length: files.length }, (_, i) => i == 0),
-  );
+    Array.from({ length: files.length }, (_, i) => i == 0)
+  )
 
   return (
     <div className="mt-4 w-full space-y-4">
@@ -34,45 +34,45 @@ export function Files(props: { diffText: string; viewType: ViewType }) {
             file={file}
             isExpanded={expandedDiffs[index] ?? true}
             setIsExpanded={(a) => {
-              expandedDiffs[index] = a;
-              setExpandedDiffs([...expandedDiffs]);
+              expandedDiffs[index] = a
+              setExpandedDiffs([...expandedDiffs])
             }}
           />
         </div>
       ))}
     </div>
-  );
+  )
 }
 
 function FileComponent({
   viewType,
   file,
   isExpanded,
-  setIsExpanded,
+  setIsExpanded
 }: {
-  viewType: ViewType;
-  file: FileData;
-  isExpanded: boolean;
-  setIsExpanded: (a: boolean) => void;
+  viewType: ViewType
+  file: FileData
+  isExpanded: boolean
+  setIsExpanded: (a: boolean) => void
 }) {
-  const { oldRevision, newRevision, type, hunks, oldPath, newPath } = file;
+  const { oldRevision, newRevision, type, hunks, oldPath, newPath } = file
 
   const tokens = useMemo(() => {
-    if (!hunks) return undefined;
+    if (!hunks) return undefined
 
-    refractor.register(ts);
+    refractor.register(ts)
 
     try {
       return tokenize(hunks, {
         highlight: true,
-        enhancers: [markEdits(hunks, { type: "block" })],
-        language: "typescript",
-        refractor,
-      });
+        enhancers: [markEdits(hunks, { type: 'block' })],
+        language: 'typescript',
+        refractor
+      })
     } catch (e) {
-      return undefined;
+      return undefined
     }
-  }, [hunks]);
+  }, [hunks])
 
   return (
     <div
@@ -81,34 +81,34 @@ function FileComponent({
     >
       <button
         className={cn(
-          "flex w-full flex-row justify-between p-4 font-mono",
-          isExpanded && "border-b-2",
+          'flex w-full flex-row justify-between p-4 font-mono',
+          isExpanded && 'border-b-2'
         )}
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex flex-row gap-4">
           <div className="my-auto rounded-sm border px-1">
-            {type === "modify"
-              ? "CHANGED"
-              : type === "add"
-                ? "ADDED"
-                : type === "delete"
-                  ? "DELETED"
-                  : "UNKNOWN"}
+            {type === 'modify'
+              ? 'CHANGED'
+              : type === 'add'
+                ? 'ADDED'
+                : type === 'delete'
+                  ? 'DELETED'
+                  : 'UNKNOWN'}
           </div>
           <h1>
-            {oldPath === "/dev/null"
+            {oldPath === '/dev/null'
               ? newPath
-              : newPath === "/dev/null"
+              : newPath === '/dev/null'
                 ? oldPath
                 : oldPath === newPath
                   ? newPath
-                  : oldPath + " → " + newPath}
+                  : oldPath + ' → ' + newPath}
           </h1>
         </div>
 
         <div className="my-auto rounded border px-1">
-          {isExpanded ? "Collapse" : "Expand"}
+          {isExpanded ? 'Collapse' : 'Expand'}
         </div>
       </button>
       {isExpanded && (
@@ -126,5 +126,5 @@ function FileComponent({
         </Diff>
       )}
     </div>
-  );
+  )
 }

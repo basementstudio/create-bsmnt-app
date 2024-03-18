@@ -15,9 +15,9 @@ export default function Loading() {
       <div className="h-12 w-full rounded bg-muted" />
       <div
         className={
-          "relative h-[800px] overflow-hidden rounded border bg-muted before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1.5s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent"
+          'relative h-[800px] overflow-hidden rounded border bg-muted before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1.5s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent'
         }
       />
     </div>
-  );
+  )
 }

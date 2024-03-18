@@ -1,58 +1,57 @@
-import clsx from "clsx";
+import clsx from 'clsx'
 
-import { SIDEBAR, SIDEBAR_HEADER_MAP, type OuterHeaders } from "../../config";
-import { getIsRtlFromLangCode, getLanguageFromURL } from "../../languages";
+import { SIDEBAR, SIDEBAR_HEADER_MAP, type OuterHeaders } from '../../config'
+import { getIsRtlFromLangCode, getLanguageFromURL } from '../../languages'
 
-type SlugType = "" | "deployment" | "usage";
+type SlugType = '' | 'deployment' | 'usage'
 
 export default function BreadCrumbs() {
-  const lang = getLanguageFromURL(window.location.href);
-  const isRtl = getIsRtlFromLangCode(lang ?? "en");
+  const lang = getLanguageFromURL(window.location.href)
+  const isRtl = getIsRtlFromLangCode(lang ?? 'en')
   const slugToEntryPath = (slug: SlugType): OuterHeaders => {
     switch (slug) {
-      case "":
-        return "Create T3 App";
-      case "usage":
-        return "Usage";
-      case "deployment":
-        return "Deployment";
+      case '':
+        return 'Create T3 App'
+      case 'usage':
+        return 'Usage'
+      case 'deployment':
+        return 'Deployment'
     }
-  };
+  }
 
-  const pathname = window.location.pathname.endsWith("/")
+  const pathname = window.location.pathname.endsWith('/')
     ? window.location.pathname.slice(0, -1)
-    : window.location.pathname;
+    : window.location.pathname
 
   const slug =
-    pathname.slice(1).split("/").length > 2
-      ? pathname.slice(1).split("/")[1]
-      : "" || "";
+    pathname.slice(1).split('/').length > 2
+      ? pathname.slice(1).split('/')[1]
+      : '' || ''
 
   const actualEntries =
     SIDEBAR[lang][
       slugToEntryPath(
-        slug === undefined || slug === "" ? "" : (slug as SlugType),
+        slug === undefined || slug === '' ? '' : (slug as SlugType)
       )
-    ];
+    ]
 
   const getPathNameFromLink = (link: string) => {
-    return [...(actualEntries ?? [])].find((entry) => entry.link === link)
-      ?.text;
-  };
+    return [...(actualEntries ?? [])].find((entry) => entry.link === link)?.text
+  }
 
   const getHeaderName = (header: OuterHeaders) => {
-    if (lang === "en") return header;
-    return SIDEBAR_HEADER_MAP[lang][header];
-  };
+    if (lang === 'en') return header
+    return SIDEBAR_HEADER_MAP[lang][header]
+  }
 
   const breadcrumbs = pathname
-    .split("/")
-    .slice(pathname.split("/").length > 3 ? -2 : -1)
+    .split('/')
+    .slice(pathname.split('/').length > 3 ? -2 : -1)
     .map((crumb) => {
       const path = pathname
-        .split("/")
-        .slice(0, pathname.split("/").indexOf(crumb) + 1)
-        .join("/");
+        .split('/')
+        .slice(0, pathname.split('/').indexOf(crumb) + 1)
+        .join('/')
 
       return {
         href: `${window.location.protocol}//${window.location.host}${path}`,
@@ -60,10 +59,10 @@ export default function BreadCrumbs() {
         text:
           getPathNameFromLink(path.slice(path.indexOf(lang))) ??
           getHeaderName(
-            `${crumb[0]?.toUpperCase()}${crumb.slice(1)}` as OuterHeaders,
-          ),
-      };
-    });
+            `${crumb[0]?.toUpperCase()}${crumb.slice(1)}` as OuterHeaders
+          )
+      }
+    })
 
   return (
     <div className="mb-4 flex items-center gap-2 px-4 text-sm">
@@ -97,13 +96,13 @@ export default function BreadCrumbs() {
         </div>
       ))}
     </div>
-  );
+  )
 }
 
 function BreadCrumbsArrow(props: { isRtl: boolean }) {
   return (
     <svg
-      className={clsx(props.isRtl && "rotate-180")}
+      className={clsx(props.isRtl && 'rotate-180')}
       width="16"
       height="16"
       viewBox="0 0 24 24"
@@ -114,5 +113,5 @@ function BreadCrumbsArrow(props: { isRtl: boolean }) {
         d="m9.005 4l8 8l-8 8L7 18l6.005-6L7 6z"
       />
     </svg>
-  );
+  )
 }
