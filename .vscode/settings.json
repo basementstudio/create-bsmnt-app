@@ -17,7 +17,7 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": ["cli", "www"],
+  "eslint.workingDirectories": ["cli"],
 
   "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
   "typescript.tsdk": "node_modules/typescript/lib",

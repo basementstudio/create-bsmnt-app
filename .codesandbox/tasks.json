@@ -19,11 +19,6 @@
       "command": "pnpm build:cli",
       "runAtStart": false
     },
-    "build:www": {
-      "name": "build:www",
-      "command": "pnpm build:www",
-      "runAtStart": false
-    },
     "build": {
       "name": "build",
       "command": "pnpm build",
@@ -34,20 +29,10 @@
       "command": "pnpm start:cli",
       "runAtStart": false
     },
-    "start:www": {
-      "name": "start:www",
-      "command": "pnpm start:www",
-      "runAtStart": false
-    },
     "dev:cli": {
       "name": "dev:cli",
       "command": "pnpm dev:cli",
       "runAtStart": false
-    },
-    "dev:www": {
-      "name": "dev:www",
-      "command": "pnpm dev:www",
-      "runAtStart": true
     },
     "clean": {
       "name": "clean",
