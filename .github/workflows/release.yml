@@ -19,7 +19,7 @@ jobs:
         uses: pnpm/action-setup@v3
 
       - name: Use Node.js 18
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: '18'
           cache: "pnpm"
@@ -35,7 +35,7 @@ jobs:
 
       - name: Create Version PR or Publish to NPM
         id: changesets
-        uses: changesets/action@v1.4.1
+        uses: changesets/action@v1.4.7
         with:
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
