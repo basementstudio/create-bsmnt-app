@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs-extra'
+import { type PackageJson } from 'type-fest'
 
 import { PKG_ROOT } from '~/consts.js'
 import { type Installer } from '~/installers/index.js'
@@ -29,6 +30,14 @@ export const tailwindInstaller: Installer = ({ projectDir }) => {
   const cssSrc = path.join(extrasDir, 'src/css/global.scss')
   const cssDest = path.join(projectDir, 'src/css/global.scss')
 
+  // add this line to /.vscode/settings.json
+  // "css.customData": [".vscode/tailwind.json"]
+  const settingsJsonPath = path.join(projectDir, '.vscode/settings.json')
+  const settingsJson = fs.readJSONSync(settingsJsonPath) as PackageJson
+
+  settingsJson['css.customData'] = ['.vscode/tailwind.json']
+
+  // so we can add these custom css rules for tailwind utilities
   const tailwindJsonSrc = path.join(extrasDir, '/config/tailwind.json')
   const tailwindJsonDest = path.join(projectDir, '.vscode/tailwind.json')
 
