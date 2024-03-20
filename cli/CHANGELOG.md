@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.10
+
+### Patch Changes
+
+- [`86cf7e3dfbe47a1669ba057ff4386bb45545c48c`](https://github.com/basementstudio/create-basement-app/commit/86cf7e3dfbe47a1669ba057ff4386bb45545c48c) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - fix tailwind config
+
 ## 1.0.9
 
 ### Patch Changes
