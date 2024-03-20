@@ -29,7 +29,7 @@ export const tailwindInstaller: Installer = ({ projectDir }) => {
   const cssSrc = path.join(extrasDir, 'src/css/global.scss')
   const cssDest = path.join(projectDir, 'src/css/global.scss')
 
-  const tailwindJsonSrc = path.join(extrasDir, 'tailwind.json')
+  const tailwindJsonSrc = path.join(extrasDir, '/config/tailwind.json')
   const tailwindJsonDest = path.join(projectDir, '.vscode/tailwind.json')
 
   fs.copySync(twCfgSrc, twCfgDest)

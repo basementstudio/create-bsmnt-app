@@ -19,7 +19,6 @@ export const TITLE_TEXT = `
 ╚═════╝   
                                                                              
 From the basement. https://basement.studio
-Forked from https://github.com/t3-oss/create-t3-app
 `
 export const DEFAULT_APP_NAME = 'my-bsmnt-app'
 export const CREATE_BSMNT_APP = 'create-bsmnt-app'
