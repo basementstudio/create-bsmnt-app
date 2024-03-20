@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.11
+
+### Patch Changes
+
+- [`0e82d2fa308277b0931737e98b53da6e33b5d4b7`](https://github.com/basementstudio/create-basement-app/commit/0e82d2fa308277b0931737e98b53da6e33b5d4b7) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - add tailwind rules inside vscode/settings
+
 ## 1.0.10
 
 ### Patch Changes
