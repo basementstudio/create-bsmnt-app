@@ -97,15 +97,15 @@ const main = async () => {
   // if tailwind is included, copy the prettier config from the extras folder
   if (packages.includes('tailwind')) {
     const extrasDir = path.join(PKG_ROOT, 'template/extras')
-    const prettierSrc = path.join(extrasDir, 'config/_prettierrc.cjs')
-    const prettierDest = path.join(projectDir, '_prettierrc.cjs')
+    const prettierSrc = path.join(extrasDir, 'config/_prettierrc.js')
+    const prettierDest = path.join(projectDir, '_prettierrc.js')
     fs.copySync(prettierSrc, prettierDest)
   }
 
   // rename the prettier config
   fs.renameSync(
-    path.join(projectDir, '_prettierrc.cjs'),
-    path.join(projectDir, '.prettierrc.cjs')
+    path.join(projectDir, '_prettierrc.js'),
+    path.join(projectDir, '.prettierrc.js')
   )
 
   if (!noGit) {
