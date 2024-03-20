@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.9
+
+### Patch Changes
+
+- [`85c08ebeb6f2d074280e89c76cc2a8189b0146bf`](https://github.com/basementstudio/create-basement-app/commit/85c08ebeb6f2d074280e89c76cc2a8189b0146bf) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - add support for tailwind css rules
+
+- [`9b6b6decca06a1143d3ec9f445e804a33127e54c`](https://github.com/basementstudio/create-basement-app/commit/9b6b6decca06a1143d3ec9f445e804a33127e54c) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - rm rest of the package
+
+- [`d651687984f459a0b033c7c98362d1c1fd91cf02`](https://github.com/basementstudio/create-basement-app/commit/d651687984f459a0b033c7c98362d1c1fd91cf02) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - upd prettier rules
+
 ## 1.0.8
 
 ### Patch Changes
