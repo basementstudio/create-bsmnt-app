@@ -19,18 +19,10 @@ export const selectAppFile = ({ projectDir }: SelectBoilerplateProps) => {
 }
 
 // Similar to _app, but for app router
-export const selectLayoutFile = ({
-  projectDir,
-  packages,
-}: SelectBoilerplateProps) => {
+export const selectLayoutFile = ({ projectDir }: SelectBoilerplateProps) => {
   const layoutFileDir = path.join(PKG_ROOT, 'template/extras/src/app/layout')
 
-  const usingTw = packages.tailwind.inUse
-  let layoutFile = 'base.tsx'
-
-  if (usingTw) {
-    layoutFile = 'with-tw.tsx'
-  }
+  const layoutFile = 'base.tsx'
 
   const appSrc = path.join(layoutFileDir, layoutFile)
   const appDest = path.join(projectDir, 'src/app/layout.tsx')
@@ -38,19 +30,10 @@ export const selectLayoutFile = ({
 }
 
 // This selects the proper index.tsx to be used that showcases the chosen tech
-export const selectIndexFile = ({
-  projectDir,
-  packages,
-}: SelectBoilerplateProps) => {
+export const selectIndexFile = ({ projectDir }: SelectBoilerplateProps) => {
   const indexFileDir = path.join(PKG_ROOT, 'template/extras/src/pages/index')
 
-  const usingTw = packages.tailwind.inUse
-
-  let indexFile = 'base.tsx'
-
-  if (usingTw) {
-    indexFile = 'with-tw.tsx'
-  }
+  const indexFile = 'base.tsx'
 
   const indexSrc = path.join(indexFileDir, indexFile)
   const indexDest = path.join(projectDir, 'src/pages/index.tsx')
@@ -58,19 +41,10 @@ export const selectIndexFile = ({
 }
 
 // Similar to index, but for app router
-export const selectPageFile = ({
-  projectDir,
-  packages,
-}: SelectBoilerplateProps) => {
+export const selectPageFile = ({ projectDir }: SelectBoilerplateProps) => {
   const indexFileDir = path.join(PKG_ROOT, 'template/extras/src/app/page')
 
-  const usingTw = packages.tailwind.inUse
-
-  let indexFile = 'base.tsx'
-
-  if (usingTw) {
-    indexFile = 'with-tw.tsx'
-  }
+  const indexFile = 'base.tsx'
 
   const indexSrc = path.join(indexFileDir, indexFile)
   const indexDest = path.join(projectDir, 'src/app/page.tsx')
