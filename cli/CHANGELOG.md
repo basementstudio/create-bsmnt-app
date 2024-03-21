@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+### Patch Changes
+
+- [`5b914248f9c80f0417405cc88b338332ee9afa58`](https://github.com/basementstudio/create-bsmnt-app/commit/5b914248f9c80f0417405cc88b338332ee9afa58) Thanks [@ignmandagaran](https://github.com/ignmandagaran)! - readme change
+
 ## 1.1.0
 
 ### Minor Changes
