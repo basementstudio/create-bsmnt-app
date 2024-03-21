@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.0
+
+### Minor Changes
+
+- [`c901f01e1b42a1873db81286e93e4cbd6b27a991`](https://github.com/basementstudio/create-bsmnt-app/commit/c901f01e1b42a1873db81286e93e4cbd6b27a991) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - fix prettier and gsap config
+
+### Patch Changes
+
+- [`f0ab431f00327c199a392e112de1c93300d7ab58`](https://github.com/basementstudio/create-bsmnt-app/commit/f0ab431f00327c199a392e112de1c93300d7ab58) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - upd
+
+- [`3c403b8ee6a822d57db3f8765d888fc1e529bf71`](https://github.com/basementstudio/create-bsmnt-app/commit/3c403b8ee6a822d57db3f8765d888fc1e529bf71) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - fix missing file in tailwind config
+
 ## 1.0.11
 
 ### Patch Changes
