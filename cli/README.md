@@ -6,7 +6,7 @@
 </p>
 
 <h1 align="center">
-  create-t3-app
+  create-bsmnt-app
 </h1>
 
 <p align="center">
