@@ -1,6 +1,5 @@
 @import './helpers';
 @import './reset.css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -19,7 +18,7 @@
 html {
   box-sizing: border-box;
   text-rendering: geometricprecision;
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
