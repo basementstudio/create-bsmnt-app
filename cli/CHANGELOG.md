@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.1
+
+### Patch Changes
+
+- [`cfb0105967771b7919edf8001294ee5ed494004f`](https://github.com/basementstudio/create-bsmnt-app/commit/cfb0105967771b7919edf8001294ee5ed494004f) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - fix missing file
+
+- [`3361264c0918fee06e5405daee783354ec69a627`](https://github.com/basementstudio/create-bsmnt-app/commit/3361264c0918fee06e5405daee783354ec69a627) Thanks [@JOYBOY-0](https://github.com/JOYBOY-0)! - fix basehub usage
+
 ## 1.2.0
 
 ### Minor Changes
