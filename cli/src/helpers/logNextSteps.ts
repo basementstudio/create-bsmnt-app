@@ -36,9 +36,8 @@ export const logNextSteps = async ({
   if (!(await isInsideGitRepo(projectDir)) && !isRootGitRepo(projectDir)) {
     logger.info(`  git init`)
   }
-  logger.info(`  git commit -m "initial commit"`)
 
   if (packages?.basehub.inUse) {
-    logger.info(`  change de BASEHUB_TOKEN in .env file`)
+    logger.info(`  change the BASEHUB_TOKEN in .env file`)
   }
 }

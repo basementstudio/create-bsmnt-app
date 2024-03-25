@@ -3,8 +3,10 @@ import fs from 'fs-extra'
 
 import { type Installer } from '~/installers/index.js'
 
-export const envVariablesInstaller: Installer = ({ projectDir }) => {
-  const envContent = getEnvContent()
+export const envVariablesInstaller: Installer = ({ projectDir, packages }) => {
+  const envContent = getEnvContent({
+    usingBasehub: packages?.basehub.inUse,
+  })
 
   const envDest = path.join(projectDir, '.env')
   const envExampleDest = path.join(projectDir, '.env.example')
@@ -13,11 +15,15 @@ export const envVariablesInstaller: Installer = ({ projectDir }) => {
   fs.writeFileSync(envExampleDest, exampleEnvContent + envContent, 'utf-8')
 }
 
-const getEnvContent = () => {
+const getEnvContent = ({
+  usingBasehub,
+}: {
+  usingBasehub: boolean | undefined
+}) => {
   const content = `
 # When adding additional environment variables, the schema in "/src/env.js"
 # should be updated accordingly.
-BASEHUB_TOKEN="bshb_pk_56s2gv3g0azxbfj2zarn55kyxl7totvj6c9fkfg7jvrqyyu8vdnveobyvmfhr4rs"
+${usingBasehub ? `BASEHUB_TOKEN="bshb_pk_56s2gv3g0azxbfj2zarn55kyxl7totvj6c9fkfg7jvrqyyu8vdnveobyvmfhr4rs` : ''}
 `
     .trim()
     .concat('\n')
